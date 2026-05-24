@@ -1,29 +1,30 @@
 # CineCalibrator (Android)
 
-Professional cinema lighting calibration tool for Android. Measures color-mixing LED fixtures using a phone camera or Sekonic C-800 spectrometer, controls fixtures over sACN/Art-Net DMX, and generates 3D LUTs and GDTF profiles.
+Professional cinema lighting calibration tool for Android.
 
-## Features
+## Quick Start
 
-- **Camera-based spectrometry** — Measures CIE 1931 xy chromaticity per diode using Android's Camera2 API
-- **Sekonic C-800 support** — USB spectrometer integration for lab-grade accuracy
-- **DMX control** — Drives fixtures over sACN (E1.31) or Art-Net during calibration scans
-- **Desaturation-path calibration** — Compensates for camera gamut limitations using known reference fixtures
-- **Color volume scanning** — Samples the fixture's full reachable gamut via random DMX blends
-- **3D LUT export** — Generates .cube files for DaVinci Resolve with KNN color-volume interpolation
-- **GDTF export** — Exports fixture profiles in the GDTF standard format
-- **Conversion engine** — Real-time Planckian locus lookup for D16xy → fixture DMX conversion
+### Requirements
+- **Android Studio** (latest stable)
+- Android device running **Android 8.0+** (API 26) with a rear camera
 
-## Requirements
+### Build & Run
+1. Clone: `git clone https://github.com/entertainmentcontrolsystems/CineCalibrator-Android.git`
+2. Open in Android Studio
+3. Wait for Gradle sync to complete
+4. Connect your Android device via USB (with USB debugging enabled)
+5. Press Run ▶️
 
-- Android 8.0+ (API 26)
-- Camera with Camera2 API support
-- USB OTG support (for Sekonic C-800)
+All dependencies are declared in `build.gradle.kts` — Gradle handles everything automatically.
 
-## Build
-
-1. Open in Android Studio
-2. Sync Gradle
-3. Build → Run on device
+### What It Does
+- Measures CIE 1931 xy chromaticity using the phone camera or a Sekonic C-800 spectrometer
+- Controls lighting fixtures over sACN (E1.31) or Art-Net DMX
+- Desaturation-path camera calibration against known reference fixtures (ETC Fos/4, Arri SkyPanel, etc.)
+- Color volume scanning for full gamut characterization
+- 3D LUT export (.cube) for DaVinci Resolve
+- GDTF fixture profile export
+- Real-time Planckian locus D16xy → fixture DMX conversion
 
 ## Architecture
 
@@ -35,7 +36,6 @@ app/src/main/java/com/cinecalibrator/
 └── MainActivity.kt
 
 sekonic/            # Sekonic C-800 USB library module
-sacn-common/        # Shared sACN/Art-Net library (see sacn-common repo)
 ```
 
 ## License
