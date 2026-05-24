@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CINECALIBRATOR"
+            android:textColor="@color/accent_cyan"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:fontFamily="monospace"
+            android:layout_marginBottom="4dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Live Converter"
+                android:textColor="@color/text_primary"
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+
+            <!-- Status dot -->
+            <ImageView
+                android:id="@+id/ivConvertStatus"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_dot_red"
+                android:layout_marginEnd="8dp"/>
+            <TextView
+                android:id="@+id/tvConvertStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stopped"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- ── PCT STATUS ────────────────────────────────────── -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardPCTStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CALIBRATION TABLE"
+                    android:textColor="@color/section_label"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.12"
+                    android:layout_marginBottom="6dp"/>
+
+                <TextView
+                    android:id="@+id/tvPCTStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No calibration table loaded. Run a scan and Planckian sweep first, or import a .pct.json file."
+                    android:textColor="@color/accent_orange"
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="2dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnImportPCT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Import .pct.json"
+                    android:textSize="12sp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:strokeColor="@color/accent_cyan"
+                    android:textColor="@color/accent_cyan"
+                    app:cornerRadius="8dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── INPUT CONFIG ──────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sACN INPUT  (D16xy)"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <!-- Universe row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Universe"
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etInputUniverse"
+                        android:layout_width="80dp" android:layout_height="40dp"
+                        android:inputType="number" android:text="1"
+                        android:textColor="@color/text_primary" android:textSize="14sp"
+                        android:gravity="center" android:background="@color/bg_dark"
+                        android:paddingHorizontal="8dp"/>
+                </LinearLayout>
+
+                <!-- Start address -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Start Address"
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etInputStartAddr"
+                        android:layout_width="80dp" android:layout_height="40dp"
+                        android:inputType="number" android:text="1"
+                        android:textColor="@color/text_primary" android:textSize="14sp"
+                        android:gravity="center" android:background="@color/bg_dark"
+                        android:paddingHorizontal="8dp"/>
+                </LinearLayout>
+
+                <!-- Fixture count -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Fixture Count"
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFixtureCount"
+                        android:layout_width="80dp" android:layout_height="40dp"
+                        android:inputType="number" android:text="1"
+                        android:textColor="@color/text_primary" android:textSize="14sp"
+                        android:gravity="center" android:background="@color/bg_dark"
+                        android:paddingHorizontal="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── OUTPUT CONFIG ─────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sACN OUTPUT  (fixture DMX)"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Universe"
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOutputUniverse"
+                        android:layout_width="80dp" android:layout_height="40dp"
+                        android:inputType="number" android:text="2"
+                        android:textColor="@color/text_primary" android:textSize="14sp"
+                        android:gravity="center" android:background="@color/bg_dark"
+                        android:paddingHorizontal="8dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Start Address"
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOutputStartAddr"
+                        android:layout_width="80dp" android:layout_height="40dp"
+                        android:inputType="number" android:text="1"
+                        android:textColor="@color/text_primary" android:textSize="14sp"
+                        android:gravity="center" android:background="@color/bg_dark"
+                        android:paddingHorizontal="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── MANUAL CONTROL (test/verify) ─────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MANUAL CONTROL"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <!-- Dimmer slider -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+                    <TextView
+                        android:layout_width="60dp" android:layout_height="wrap_content"
+                        android:text="Dimmer"
+                        android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                    <SeekBar
+                        android:id="@+id/seekDimmer"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="100" android:progress="100"
+                        android:progressTint="@color/accent_cyan"
+                        android:thumbTint="@color/accent_cyan"
+                        android:layout_marginHorizontal="8dp"/>
+                    <TextView
+                        android:id="@+id/tvDimmerPct"
+                        android:layout_width="40dp" android:layout_height="wrap_content"
+                        android:text="100%"
+                        android:textColor="@color/text_primary" android:textSize="13sp"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+                <!-- CIE xy picker -->
+                <com.cinecalibrator.ui.CIExyPickerView
+                    android:id="@+id/ciexyPicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <!-- Current xy readout -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/tvManualXY"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="x = 0.3127   y = 0.3290  (D65)"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSendManual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="Send"
+                        android:textSize="12sp"
+                        app:backgroundTint="@color/accent_cyan"
+                        android:textColor="@color/bg_dark"
+                        app:cornerRadius="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── LIVE STATUS ───────────────────────────────────── -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLiveStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#0D1A0D"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LIVE CONVERSION"
+                    android:textColor="@color/success_green"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.12"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvLiveInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_hint"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvLiveOutput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvPacketRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_hint"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── ACTION BUTTONS ────────────────────────────────── -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStartConvert"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="▶  Start Live Conversion"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/accent_cyan"
+            android:textColor="@color/bg_dark"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="32dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExportConvConfig"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="⬇ Export Config"
+                android:textSize="13sp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="@color/accent_cyan"
+                android:textColor="@color/accent_cyan"
+                app:cornerRadius="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerifyC800"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="🔬 Verify (C-800)"
+                android:textSize="13sp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="@color/accent_orange"
+                android:textColor="@color/accent_orange"
+                app:cornerRadius="10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/setupFragment">
+
+    <fragment android:id="@+id/setupFragment"
+        android:name="com.cinecalibrator.ui.SetupFragment"
+        android:label="Setup">
+        <action android:id="@+id/action_setup_to_calibration"
+            app:destination="@id/cameraCalibrationFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action android:id="@+id/action_setup_to_scan"
+            app:destination="@id/scanFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/cameraCalibrationFragment"
+        android:name="com.cinecalibrator.ui.CameraCalibrationFragment"
+        android:label="Camera Calibration">
+        <action android:id="@+id/action_cameraCalibration_to_scan"
+            app:destination="@id/scanFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/scanFragment"
+        android:name="com.cinecalibrator.ui.ScanFragment"
+        android:label="Scan">
+        <action android:id="@+id/action_scan_to_results"
+            app:destination="@id/resultsFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/resultsFragment"
+        android:name="com.cinecalibrator.ui.ResultsFragment"
+        android:label="Results"/>
+
+    <fragment android:id="@+id/convertFragment"
+        android:name="com.cinecalibrator.ui.ConvertFragment"
+        android:label="Convert"/>
+
+    <fragment android:id="@+id/historyFragment"
+        android:name="com.cinecalibrator.ui.HistoryFragment"
+        android:label="History">
+        <action android:id="@+id/action_history_to_results"
+            app:destination="@id/resultsFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/settingsFragment"
+        android:name="com.cinecalibrator.ui.SettingsFragment"
+        android:label="Settings"/>
+
+</navigation>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CineCalibrator</string>
+    <string name="app_version">1.0.0</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Fixture Setup</string>
+    <string name="select_fixture">Select fixture template…</string>
+    <string name="import_gdtf">Import GDTF File</string>
+    <string name="dmx_universe">Universe</string>
+    <string name="dmx_target_ip">Target IP Address</string>
+    <string name="btn_connect">Connect</string>
+    <string name="btn_test">Test Flash</string>
+    <string name="btn_continue">Continue to Scan →</string>
+
+    <!-- Scan -->
+    <string name="scan_title">Scan</string>
+    <string name="btn_start_scan">▶  Start Scan</string>
+    <string name="btn_cancel_scan">■  Cancel Scan</string>
+    <string name="tripod_tip">Mount phone on a tripod, aim the crosshair at the light source (1–3 m distance recommended). Ensure no ambient light contamination.</string>
+    <string name="clipping_warning">⚠  Sensor clipping — reduce light intensity or increase distance</string>
+
+    <!-- Results -->
+    <string name="results_title">Results</string>
+    <string name="export_pdf">📄 PDF Report</string>
+    <string name="export_csv">📊 CSV Data</string>
+    <string name="export_lut">🎨 Export LUT (.cube)</string>
+
+    <!-- Gamuts -->
+    <string name="gamut_rec709">Rec.709</string>
+    <string name="gamut_rec2020">Rec.2020</string>
+    <string name="gamut_aces_ap0">ACES AP0</string>
+    <string name="gamut_aces_ap1">ACES AP1 (ACEScg)</string>
+
+    <!-- Errors -->
+    <string name="err_no_fixture">Please select a fixture first</string>
+    <string name="err_no_dmx">DMX output not connected</string>
+    <string name="err_no_camera">Camera permission required</string>
+    <string name="err_camera_raw_unavailable">RAW capture not available on this device — using YUV (reduced accuracy)</string>
+</resources>

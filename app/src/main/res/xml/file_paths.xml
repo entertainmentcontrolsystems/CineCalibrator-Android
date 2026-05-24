@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path name="cinecalibrator_exports" path="." />
+    <external-cache-path name="external_exports" path="." />
+    <files-path name="files" path="." />
+</paths>

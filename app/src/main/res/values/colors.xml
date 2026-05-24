@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── App Backgrounds ──────────────────────────────────────── -->
+    <color name="bg_dark">#0A0D11</color>
+    <color name="card_bg">#141820</color>
+    <color name="divider">#1E2530</color>
+
+    <!-- ── Text ─────────────────────────────────────────────────── -->
+    <color name="text_primary">#F0F2F5</color>
+    <color name="text_secondary">#9BA4B0</color>
+    <color name="text_hint">#505A66</color>
+    <color name="section_label">#6B7A8A</color>
+
+    <!-- ── Accents ───────────────────────────────────────────────── -->
+    <color name="accent_cyan">#00C9FF</color>
+    <color name="accent_orange">#FF8C42</color>
+    <color name="error_red">#CC3333</color>
+    <color name="success_green">#33AA66</color>
+
+    <!-- ── Gamut reference colors ────────────────────────────────── -->
+    <color name="gamut_709">#3399FF</color>
+    <color name="gamut_2020">#33FF99</color>
+    <color name="gamut_aces">#FFCC00</color>
+
+    <!-- ── Standard ─────────────────────────────────────────────── -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- ── Material default colors (required by auto-generated     -->
+    <!--    values-night theme; keep even if not used directly)     -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+</resources>

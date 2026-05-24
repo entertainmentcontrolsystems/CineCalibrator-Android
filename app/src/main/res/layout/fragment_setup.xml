@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CINECALIBRATOR"
+            android:textColor="@color/accent_cyan"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:fontFamily="monospace"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fixture Setup"
+            android:textColor="@color/text_primary"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Measurement source banner — C-800 if connected, camera if not -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#1A2030"
+            android:padding="12dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/ivMeasurementSourceIcon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_dot_red"
+                android:layout_marginEnd="10dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMeasurementSourceLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Measurement source"
+                    android:textColor="@color/text_hint"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.1"/>
+
+                <TextView
+                    android:id="@+id/tvMeasurementSourceValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone camera (Sekonic C-800 not connected)"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ── FIXTURE SECTION ──────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FIXTURE"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Template"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="6dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerFixtureTemplate"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/spinner_bg"
+                    android:popupBackground="@color/card_bg"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Or import GDTF file"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=".gdtf / .zip from manufacturer"
+                            android:textColor="@color/text_hint"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnImportGDTF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="Import GDTF"
+                        android:textSize="13sp"
+                        app:cornerRadius="8dp"
+                        app:strokeColor="@color/accent_cyan"
+                        app:strokeWidth="1dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:textColor="@color/accent_cyan"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvFixtureInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No fixture selected"
+                    android:textColor="@color/text_hint"
+                    android:textSize="12sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/mono_bg"
+                    android:padding="10dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Mode selector (hidden until multi-mode fixture loaded) -->
+        <TextView
+            android:id="@+id/labelMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DMX Mode"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"
+            android:visibility="gone"/>
+
+        <Spinner
+            android:id="@+id/spinnerMode"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/spinner_bg"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
+
+        <!-- Diode list -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CHANNELS TO SCAN"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tvDiodeList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select a fixture to see channels"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:padding="16dp"
+                android:lineSpacingExtra="6dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── DMX SECTION ──────────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DMX OUTPUT"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Protocol -->
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <RadioButton
+                        android:id="@+id/radioSACN"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="sACN (E1.31)"
+                        android:textColor="@color/text_primary"
+                        android:checked="true"
+                        android:buttonTint="@color/accent_cyan"/>
+
+                    <RadioButton
+                        android:id="@+id/radioArtNet"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ArtNet"
+                        android:textColor="@color/text_primary"
+                        android:buttonTint="@color/accent_cyan"/>
+                </RadioGroup>
+
+                <!-- Universe -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Universe"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUniverse"
+                        android:layout_width="100dp"
+                        android:layout_height="44dp"
+                        android:text="1"
+                        android:inputType="number"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:background="@drawable/input_bg"/>
+                </LinearLayout>
+
+                <!-- Target IP -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Target IP (leave blank for multicast/broadcast)"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="6dp"/>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTargetIP"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:hint="e.g. 192.168.1.100"
+                    android:inputType="textUri"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="14sp"
+                    android:background="@drawable/input_bg"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Connect buttons row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/ivDMXStatus"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_dot_red"
+                        android:layout_marginEnd="10dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnConnect"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:text="Connect"
+                        android:textSize="14sp"
+                        app:cornerRadius="8dp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTestDMX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:text="Test Flash"
+                        android:textSize="13sp"
+                        app:cornerRadius="8dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        app:strokeColor="@color/text_hint"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── SEKONIC C-800 SPECTROMETER ──────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MEASUREMENT SOURCE"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Status row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="6dp">
+
+                    <ImageView
+                        android:id="@+id/ivSekonicStatus"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_dot_red"
+                        android:layout_marginEnd="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tvSekonicStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Sekonic C-800 not connected"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Connect Sekonic C-800 via USB-C OTG for professional spectrometry. When connected, the C-800 is used for all measurements — no camera gamut limits, true CCT/Duv, TM-30, SSI, TLCI, and 1 nm SPD. Phone camera is used as a fallback only."
+                    android:textColor="@color/text_hint"
+                    android:textSize="11sp"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Mode selector (only visible when connected) -->
+                <LinearLayout
+                    android:id="@+id/layoutSekonicMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp"
+                    android:visibility="gone">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnModeSpectrometer"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:text="Spectrometer"
+                        android:textSize="12sp"
+                        app:cornerRadius="8dp"
+                        app:backgroundTint="@color/accent_cyan"
+                        android:textColor="@color/bg_dark"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnModeCamera"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:text="Camera"
+                        android:textSize="12sp"
+                        app:cornerRadius="8dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
+
+                <!-- Connect / Disconnect button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnConnectSekonic"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Connect Sekonic C-800"
+                    android:textSize="14sp"
+                    app:cornerRadius="10dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:strokeColor="@color/accent_cyan"
+                    android:textColor="@color/accent_cyan"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── SCAN OPTIONS ────────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCAN OPTIONS"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- C-800 timing note — shown when spectrometer connected -->
+        <TextView
+            android:id="@+id/tvSpectrometerScanNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚡ C-800 connected: multi-level and color volume scans are disabled by default (each C-800 shot ≈ 3 s). Enable below only if needed."
+            android:textColor="@color/accent_orange"
+            android:textSize="11sp"
+            android:lineSpacingExtra="2dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Multi-level sweep toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Multi-level sweep (LUT data)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sweeps each emitter at 25%/50%/75%/100% for LUT generation"
+                            android:textColor="@color/text_hint"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchMultiLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:thumbTint="@color/accent_cyan"
+                        android:trackTint="#334455"/>
+                </LinearLayout>
+
+                <!-- Color volume toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Color volume scan"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Blends all emitters in 150 random combinations to map full gamut volume"
+                            android:textColor="@color/text_hint"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchColorVolume"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:thumbTint="@color/accent_cyan"
+                        android:trackTint="#334455"/>
+                </LinearLayout>
+
+                <!-- Settle time -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Settle time (ms)"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSettleTime"
+                        android:layout_width="100dp"
+                        android:layout_height="44dp"
+                        android:text="500"
+                        android:inputType="number"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:background="@drawable/input_bg"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── CAMERA CALIBRATION STATUS ──────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CAMERA CALIBRATION"
+            android:textColor="@color/section_label"
+            android:textSize="10sp"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivCalibStatus"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_dot_red"
+                        android:layout_marginEnd="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tvCalibStatusSetup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Not calibrated — recommended before scanning"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Calibrating corrects your phone camera's colour response using a known reference fixture. Strongly recommended for accurate CIE xy results."
+                    android:textColor="@color/text_hint"
+                    android:textSize="11sp"
+                    android:lineSpacingExtra="2dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoToCalibration"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Calibrate Camera (Step 2 of 3)"
+                    android:textSize="14sp"
+                    app:cornerRadius="10dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:strokeColor="@color/accent_cyan"
+                    android:textColor="@color/accent_cyan"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Continue button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Skip Calibration — Scan Now →"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/card_bg"
+            app:strokeColor="@color/text_hint"
+            app:strokeWidth="1dp"
+            android:textColor="@color/text_secondary"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    </LinearLayout>
+</ScrollView>

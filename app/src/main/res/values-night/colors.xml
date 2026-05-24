@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Night mode uses identical dark palette -->
+    <color name="bg_dark">#0A0D11</color>
+    <color name="card_bg">#141820</color>
+    <color name="accent_cyan">#00C9FF</color>
+    <color name="text_primary">#F0F2F5</color>
+    <color name="text_secondary">#9BA4B0</color>
+</resources>

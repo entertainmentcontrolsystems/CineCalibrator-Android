@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Header -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="STEP 2 OF 3"
+                android:textColor="@color/accent_cyan"
+                android:textSize="11sp"
+                android:letterSpacing="0.15"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Camera Calibration"
+                android:textColor="@color/text_primary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aim camera at the reference fixture (within crosshair). The app will drive each emitter and measure your camera's colour response."
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- ── CAMERA PREVIEW ─────────────────────────── -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CAMERA PREVIEW"
+                android:textColor="@color/section_label"
+                android:textSize="10sp"
+                android:letterSpacing="0.12"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="#000000"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp">
+
+                    <androidx.camera.view.PreviewView
+                        android:id="@+id/cameraPreviewCalib"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:scaleType="fillCenter"/>
+
+                    <!-- ROI crosshair overlay -->
+                    <com.cinecalibrator.ui.ROIOverlayView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <!-- Camera status badge -->
+                    <TextView
+                        android:id="@+id/tvCameraStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⏳ Starting camera…"
+                        android:textColor="@color/text_hint"
+                        android:textSize="11sp"
+                        android:background="#88000000"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:layout_margin="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Place light source in crosshair · Mount on tripod · Room should be dark"
+                android:textColor="@color/text_hint"
+                android:textSize="11sp"
+                android:textAlignment="center"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- ── CURRENT STATUS ─────────────────────────── -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CURRENT STATUS"
+                        android:textColor="@color/section_label"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.12"
+                        android:layout_marginBottom="6dp"/>
+
+                    <TextView
+                        android:id="@+id/tvCurrentCalibration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not calibrated"
+                        android:textColor="@color/text_hint"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnClearCalibration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="Clear Calibration"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        app:cornerRadius="8dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        app:strokeColor="@color/error_red"
+                        android:textColor="@color/error_red"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ── REFERENCE FIXTURE LIST ─────────────────── -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SELECT REFERENCE FIXTURE"
+                android:textColor="@color/section_label"
+                android:textSize="10sp"
+                android:letterSpacing="0.12"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <ListView
+                    android:id="@+id/lvReferences"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@color/divider"
+                    android:dividerHeight="1dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvSelectedRef"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accent_cyan"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="14dp"
+                android:visibility="gone"/>
+
+            <!-- ── READINESS CHECKLIST (always visible) ───── -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardReadiness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardBackgroundColor="#1A2A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="BEFORE YOU START"
+                        android:textColor="@color/success_green"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.12"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="✓  DMX connected and fixture selected in Setup\n✓  Room is as dark as possible (no other light sources)\n✓  Camera crosshair centred on the fixture face\n✓  Fixture distance: 1–3 m  ·  fills &lt;50% of frame\n\nThe calibration will automatically ramp each emitter to find your camera's exposure limit, then sweep from saturated → white to map the colour matrix."
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:lineSpacingExtra="3dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ── PROGRESS ───────────────────────────────── -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/progressCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#1A2030"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/tvCalibProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <ProgressBar
+                        android:id="@+id/calibProgressBar"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:progressTint="@color/accent_cyan"
+                        android:progressBackgroundTint="#333333"
+                        android:max="8"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ── DEVIATION DIAGRAM (shown on insufficient data) ── -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardDeviation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CAMERA vs REFERENCE DEVIATION"
+                        android:textColor="@color/accent_orange"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.12"
+                        android:layout_marginBottom="6dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Filled circle = manufacturer reference xy\nHollow circle = what your camera measured\nArrows show the error magnitude"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:lineSpacingExtra="2dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <com.cinecalibrator.ui.CameraDeviationView
+                        android:id="@+id/cameraDeviationView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ── ACTION BUTTONS ─────────────────────────── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStartCalibration"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="▶  Scan Reference Fixture Now"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:enabled="false"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="12dp"
+                app:backgroundTint="@color/accent_cyan"
+                android:textColor="@color/bg_dark"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="32dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="← Back"
+                    android:textSize="13sp"
+                    app:cornerRadius="10dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:strokeColor="@color/divider"
+                    android:textColor="@color/text_secondary"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSkipCalibration"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:text="Skip — Scan Without Calibrating"
+                    android:textSize="12sp"
+                    app:cornerRadius="10dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:strokeColor="@color/text_hint"
+                    android:textColor="@color/text_secondary"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
