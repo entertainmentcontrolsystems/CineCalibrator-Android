@@ -83,6 +83,62 @@
                 android:textColor="@color/accent_cyan"/>
         </LinearLayout>
 
+        <!-- ── PRIMARY ACTION: Export LUT ─────────────────────────── -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="12dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/accent_cyan">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🎯 CALIBRATION LUT READY"
+                    android:textColor="@color/accent_cyan"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Export this LUT for use in MSxy-Converter to enable accurate color translation on this fixture."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnExportLUT"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="🎨  Export LUT (.cube)"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp"
+                    app:backgroundTint="@color/accent_cyan"
+                    android:textColor="@color/bg_dark"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LUT files enable real-time color correction in MSxy-Converter"
+                    android:textColor="@color/text_hint"
+                    android:textSize="11sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- ── Camera Calibration ─────────────────────────────── -->
         <TextView
             android:layout_width="match_parent"
@@ -625,32 +681,7 @@
                 android:textColor="@color/gamut_2020"/>
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnExportLUT"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="🎨  Export LUT (.cube)"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            app:cornerRadius="12dp"
-            app:backgroundTint="@color/accent_cyan"
-            android:textColor="@color/bg_dark"
-            android:enabled="false"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnExportGDTF"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="📦  Export Calibrated GDTF"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="32dp"
-            app:cornerRadius="12dp"
-            app:backgroundTint="#2A1A40"
-            app:strokeColor="#8855FF"
-            app:strokeWidth="1dp"
-            android:textColor="#BB88FF"/>
+        <!-- LUT export moved to top as primary action -->
 
     </LinearLayout>
 </ScrollView>
