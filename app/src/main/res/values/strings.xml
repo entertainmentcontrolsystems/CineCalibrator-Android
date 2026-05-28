@@ -21,10 +21,14 @@
     <string name="clipping_warning">⚠  Sensor clipping — reduce light intensity or increase distance</string>
 
     <!-- Results -->
-    <string name="results_title">Results</string>
+    <string name="results_title">Scan Complete</string>
+    <string name="lut_primary_action">🎯 Export LUT for MSxy-Converter</string>
+    <string name="lut_description">This LUT enables accurate color translation in MSxy-Converter for real-time color correction on this fixture.</string>
+    <string name="cie_diagnostic_label">Gamut Analysis (Diagnostic)</string>
     <string name="export_pdf">📄 PDF Report</string>
     <string name="export_csv">📊 CSV Data</string>
     <string name="export_lut">🎨 Export LUT (.cube)</string>
+    <string name="share_to_msxy">↗ Share to MSxy-Converter</string>
 
     <!-- Gamuts -->
     <string name="gamut_rec709">Rec.709</string>

@@ -544,7 +544,7 @@ class ExportManager(private val context: Context) {
     // ─── Share / Open ────────────────────────────────────────────────────────────
 
     fun shareFile(file: File): Intent {
-        val uri: Uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+        val uri = getFileUri(file)
         return Intent(Intent.ACTION_SEND).apply {
             type = when (file.extension) {
                 "pdf" -> "application/pdf"
@@ -555,5 +555,9 @@ class ExportManager(private val context: Context) {
             putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
+    }
+
+    fun getFileUri(file: File): Uri {
+        return FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
     }
 }

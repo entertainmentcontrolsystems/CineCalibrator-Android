@@ -457,10 +457,34 @@ class ResultsFragment : Fragment() {
         binding.btnExportLUT.setOnClickListener {
             val file = viewModel.exportLUT()
             if (file != null) {
+                // Generic share chooser
                 startActivity(android.content.Intent.createChooser(
                     viewModel.exportManager.shareFile(file), "Share LUT"))
             } else {
                 Snackbar.make(binding.root, "LUT not yet generated", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+
+        // Direct share to MSxy-Converter
+        binding.btnShareToMSxy.setOnClickListener {
+            val file = viewModel.exportLUT()
+            if (file != null) {
+                try {
+                    val uri = viewModel.exportManager.getFileUri(file)
+                    val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+                        type = "application/octet-stream"
+                        putExtra(android.content.Intent.EXTRA_STREAM, uri)
+                        setPackage("com.msxyconverter")
+                        addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    // MSxy-Converter not installed — fall back to chooser
+                    startActivity(android.content.Intent.createChooser(
+                        viewModel.exportManager.shareFile(file), "Share LUT"))
+                }
+            } else {
+                Snackbar.make(binding.root, "Generate a LUT first by running a scan", Snackbar.LENGTH_SHORT).show()
             }
         }
 
@@ -470,17 +494,6 @@ class ResultsFragment : Fragment() {
                 startActivity(android.content.Intent.createChooser(
                     viewModel.exportManager.shareFile(it), "Share Color Volume"))
             } ?: Snackbar.make(binding.root, "No color volume data yet", Snackbar.LENGTH_SHORT).show()
-        }
-
-        binding.btnExportGDTF.setOnClickListener {
-            val file = viewModel.exportGDTF()
-            if (file != null) {
-                Snackbar.make(binding.root, "GDTF: ${file.name}", Snackbar.LENGTH_SHORT).show()
-                startActivity(android.content.Intent.createChooser(
-                    viewModel.exportManager.shareFile(file), "Share GDTF"))
-            } else {
-                Snackbar.make(binding.root, "No scan results to export", Snackbar.LENGTH_SHORT).show()
-            }
         }
 
         setupPlanckianSweepCard()
