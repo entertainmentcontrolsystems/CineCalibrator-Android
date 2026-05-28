@@ -617,7 +617,7 @@ class ResultsFragment : Fragment() {
     private fun setupLUTOptions() {
         val targets = com.cinecalibrator.core.LUTGenerator.TargetColorspace.values()
         binding.spinnerLUTTarget.adapter = ArrayAdapter(requireContext(),
-            android.R.layout.simple_spinner_dropdown_item, targets.map { it.name })
+            R.layout.spinner_dropdown_item, targets.map { it.name })
         binding.spinnerLUTTarget.setOnItemSelectedListener(
             object : android.widget.AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(

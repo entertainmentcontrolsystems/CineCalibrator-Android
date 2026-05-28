@@ -79,7 +79,7 @@ class SetupFragment : Fragment() {
         val templateNames = fixtureTemplates.map { "${it.manufacturer} – ${it.name}" }
         val adapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
+            R.layout.spinner_dropdown_item,
             listOf("— Select template —") + templateNames
         )
         binding.spinnerFixtureTemplate.adapter = adapter
@@ -156,7 +156,7 @@ class SetupFragment : Fragment() {
         if (fixture.modes.size > 1) {
             val modeNames = fixture.modes.map { it.name }
             binding.spinnerMode.adapter = ArrayAdapter(requireContext(),
-                android.R.layout.simple_spinner_dropdown_item, modeNames)
+                R.layout.spinner_dropdown_item, modeNames)
             binding.spinnerMode.visibility = View.VISIBLE
             binding.labelMode.visibility = View.VISIBLE
         } else {

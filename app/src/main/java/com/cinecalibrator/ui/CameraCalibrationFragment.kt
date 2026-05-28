@@ -66,7 +66,7 @@ class CameraCalibrationFragment : Fragment() {
         val refs = CameraCalibration.KNOWN_REFERENCES
         val adapter = android.widget.ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_list_item_single_choice,
+            R.layout.dark_list_item,
             refs.map { "${it.manufacturer} ${it.model}" }
         )
         binding.lvReferences.adapter = adapter
